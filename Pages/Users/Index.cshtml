@@ -1,0 +1,122 @@
+﻿@page
+@model MyAutoService.Pages.User.IndexModel
+@{
+}
+
+<form>
+	<div class="border" style="background-color: white">
+		<div class="row p-3">
+			<div class="col-6">
+				<h2 class="text-info">لیست مشتری های ما</h2>
+			</div>
+			<div class="col-6 text-right">
+				<a asp-page="/Account/Register" asp-area="Identity" class="btn btn-info">
+					افزودن مشتری جدید
+					<i class="fas fa-plus fa-sm"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="border">
+		<br />
+		<div>
+			<br />
+			<div>
+				<div class="border">
+					<div style="height: 60px" class="container border border-secondary">
+						<div class="row">
+							<div class="col-11">
+								<div class="row" style="padding-top: 10px">
+									<div class="col-4">
+										<input type="text" name="searchName" placeholder="نام" class="form-control" />
+									</div>
+									
+									<div class="col-4">
+										<input type="text" name="searchPhone" placeholder="تلفن" class="form-control" />
+									</div>
+									<div class="col-4">
+										<input  name="searchEmail" placeholder="ایمیل" class="form-control" />
+									</div>
+								</div>
+							</div>
+							<div class="col-1">
+								<div class="row" style="padding-top: 10px; padding-left: 15px">
+									<button type="submit"  class="btn btn-info form-control">
+										بیاب
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br />
+			@if (Model.UsersListView.Users.Count > 0)
+			{
+				<table class="table table-striped border" dir="rtl">
+					<tr class="table-secondary">
+						<th>
+							@Html.DisplayNameFor(m => m.UsersListView.Users[0].Name)
+
+						</th>
+						<th>
+							@Html.DisplayNameFor(m => m.UsersListView.Users[0].PhoneNumber)
+
+						</th>
+						<th>
+
+							@Html.DisplayNameFor(m => m.UsersListView.Users[0].Email)
+						</th>
+						<th></th>
+					</tr>
+					@foreach (var user in Model.UsersListView.Users)
+					{
+						<tr>
+							<td>
+								@user.Name
+							</td>
+							<td>
+								@user.PhoneNumber
+							</td>
+							<td>
+								@user.Email
+							</td>
+							<td style="width: 150px">
+								<div class="btn-group" role="group">
+									<a class="btn btn-outline-primary" asp-page="Edit" asp-route-Id="@user.Id">
+										<i class="fas fa-edit fa-sm"></i>
+									</a>
+									<a class="btn btn-outline-success" asp-page="Details" asp-route-Id="@user.Id">
+										<i class="fas fa-list-alt fa-sm"></i>
+									</a>
+									<a class="btn btn-outline-danger" asp-page="Delete" asp-route-Id="@user.Id">
+										<i class="fas fa-trash fa-sm"></i>
+									</a>
+									
+									<a class="btn btn-outline-danger" asp-page="/Cars/Index" asp-route-user-Id="@user.Id">
+										مشاهده ماشین ها
+									</a> 
+
+								</div>
+							</td>
+						</tr>
+					}
+					<tr>
+						<td colspan="5" class="text-left">
+							<div page-model="@Model.UsersListView.PagingInfo"
+							 page-action="Index"
+							 page-class="btn border"
+							 page-class-selected="btn-info active"
+							 page-class-normal="btn btn-light"
+							 class="btn-group">
+							</div>
+						</td>
+					</tr>
+				</table>
+			}
+			else
+			{
+				<div>کاربری یافت نشد</div>
+			}
+		</div>
+	</div>
+</form>

@@ -1,0 +1,62 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="row container">
+    <div class="col-3">
+        <ul class="list-group">
+            <li class="list-group-item active" aria-current="true">لیست سرویس ها</li>
+            @foreach (var item in Model.ServiceTypes)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    @item.Name
+                    <span class="badge bg-primary rounded-pill text-white-50">@item.Price.ToString("#,0")</span>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-9">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" style="height: 350px" src="/Images/1.jpg" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" style="height: 350px" src="/Images/2.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" style="height: 350px" src="/Images/3.jpg" alt="Third slide">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="row container">
+        <h1 class="text-center">مشتریان ما</h1>
+        <hr />
+    </div>
+    <div class="row">
+        @foreach (var item in Model.Cars)
+        {
+            <div class="card m-3" style="width: 18rem;">
+                <img src="/CarImages/@item.ImageName" style="height: 200px" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@item.Model</li>
+                    <li class="list-group-item">@item.Color</li>
+                    <li class="list-group-item">@item.Year</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">مشاهده جزئیات</a>
+                    <a href="#" class="card-link">سرویس جدید</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
